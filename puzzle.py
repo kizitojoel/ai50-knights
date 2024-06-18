@@ -12,21 +12,65 @@ CKnave = Symbol("C is a Knave")
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    # TODO
+    Or(
+        AKnave,
+        AKnight
+    ),
+    Or(
+        Not(AKnave),
+        Not(AKnight)
+    ),
+    Implication(AKnight, And(AKnight, AKnave)),
+    Implication(AKnave, Not(And(AKnight, AKnave)))
 )
 
 # Puzzle 1
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    # TODO
+    Or(
+        AKnave,
+        AKnight
+    ),
+    Or(
+        Not(AKnave),
+        Not(AKnight)
+    ),
+    Or(
+        BKnave,
+        BKnight
+    ),
+    Or(
+        Not(BKnave),
+        Not(BKnight)
+    ),
+    Implication(AKnight, And(AKnave, BKnave)),
+    Implication(AKnave, Or(Not(AKnave), Not(BKnave)))
 )
 
 # Puzzle 2
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    # TODO
+    Or(
+        AKnave,
+        AKnight
+    ),
+    Or(
+        Not(AKnave),
+        Not(AKnight)
+    ),
+    Or(
+        BKnave,
+        BKnight
+    ),
+    Or(
+        Not(BKnave),
+        Not(BKnight)
+    ),
+    Implication(AKnight, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
+    Implication(BKnight, Or(And(AKnight, BKnave), And(AKnave, BKnight))),
+    Implication(BKnave, AKnight)
 )
 
 # Puzzle 3
@@ -35,7 +79,35 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    # TODO
+    Or(
+        AKnave,
+        AKnight
+    ),
+    Or(
+        Not(AKnave),
+        Not(AKnight)
+    ),
+    Or(
+        BKnave,
+        BKnight
+    ),
+    Not(And(BKnight, BKnave)),
+    Not(And(CKnight, CKnave)),
+    Or(
+        CKnave,
+        CKnight
+    ),
+    Or(
+        Not(CKnave),
+        Not(CKnight)
+    ),
+    Implication(AKnight, Or(AKnight, AKnave)),
+    Implication(AKnave, Not(Or(AKnight, AKnave))),
+    Implication(BKnight, Implication(AKnight, AKnave)),
+    Implication(BKnight, CKnave),
+    Implication(CKnight, AKnight),
+    Implication(CKnight, BKnave),
+    Implication(CKnave, Not(AKnight))
 )
 
 
